@@ -36,7 +36,7 @@ public class Movimiento : MonoBehaviour
      
      
         string message = serialController.ReadSerialMessage();
-        string messageBinario = serialControllerBinario.ReadSerialMessage();
+        string messageBinario = serialControllerBinario.ReadSerialMessage(); //
       
       
 
