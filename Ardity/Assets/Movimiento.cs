@@ -36,7 +36,7 @@ public class Movimiento : MonoBehaviour
      
      
         string message = serialController.ReadSerialMessage();
-        string messageBinario = serialControllerBinario.ReadSerialMessage(); //
+        byte[] messageBinario = serialControllerBinario.ReadSerialMessage(); ; //
       
       
 
@@ -52,7 +52,7 @@ public class Movimiento : MonoBehaviour
         if (messageBinario != null )
         {
             float cm = 0;
-            float.TryParse(messageBinario,out cm);;
+            //float.TryParse(messageBinario[0],out cm);;
             Debug.Log("cm" + cm);
             float velocidad = speedAdelante * 1 * Time.deltaTime;
             Vector3 vectorDesplazamiento = transform.forward * velocidad ;
