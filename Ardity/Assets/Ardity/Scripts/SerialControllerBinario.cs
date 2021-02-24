@@ -61,6 +61,16 @@ public class SerialControllerBinario : MonoBehaviour
     // It creates a new thread that tries to connect to the serial device
     // and start reading from it.
     // ------------------------------------------------------------------------
+
+    Escena datos;
+    private void Awake()
+    {
+        datos = GameObject.Find("DonDestroy").GetComponent<Escena>();
+        portName = datos.comESP;
+        baudRate = int.Parse(datos.baudESP);
+    }
+
+
     void OnEnable()
     {
         serialThread = new SerialThreadLinesBinario(portName, 
