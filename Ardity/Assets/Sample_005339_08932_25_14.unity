@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c081a4f33e67870408eaf53f759e8418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: COM3
+  portName: COM5
   baudRate: 9600
   messageListener: {fileID: 0}
   reconnectionDelay: 1000
@@ -1298,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4718552058532164, guid: 705458a9eac3ae740932e6aa33f3ca89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7192025
+      value: 0.743
       objectReference: {fileID: 0}
     - target: {fileID: 4718552058532164, guid: 705458a9eac3ae740932e6aa33f3ca89, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14392,7 +14392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc5f48af2cffd747a079fe8c632e2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: COM5
+  portName: COM3
   baudRate: 9600
   messageListener: {fileID: 0}
   reconnectionDelay: 1000

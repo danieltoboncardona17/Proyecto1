@@ -39,10 +39,8 @@ public class SerialThreadLinesBinario : AbstractSerialThreadBinario
     protected override object ReadFromWire(SerialPort serialPort)
     {
         if (serialPort.BytesToRead > 0)
-        {
-            serialPort.Read(buffer, 0, 1);
-           
-           
+        {     
+            serialPort.Read(buffer, 0, 1);     
             return buffer;
         }
         else

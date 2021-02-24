@@ -21,7 +21,7 @@ public class Movimiento : MonoBehaviour
     public SerialController serialController;
     public SerialControllerBinario serialControllerBinario;
     public GameObject minions;
-    
+    byte[] messageBinario =  { 0x0 };
     // Initialization
     void Start()
     {
@@ -36,24 +36,16 @@ public class Movimiento : MonoBehaviour
      
      
         string message = serialController.ReadSerialMessage();
-        byte[] messageBinario = serialControllerBinario.ReadSerialMessage(); ; //
+        messageBinario = serialControllerBinario.ReadSerialMessage(); ; //
+       
+       
       
-      
-
-        if (message == "hit")
-        {
-
-            pajaro.gameObject.GetComponent<Animator>().SetTrigger("Attack");
-    
-            pajaro.transform.LookAt(minions.transform);
-
-        }
          
-        if (messageBinario != null )
+        if (message != null )
         {
             float cm = 0;
-            //float.TryParse(messageBinario[0],out cm);;
-            Debug.Log("cm" + cm);
+            float.TryParse(message ,out cm);;
+            
             float velocidad = speedAdelante * 1 * Time.deltaTime;
             Vector3 vectorDesplazamiento = transform.forward * velocidad ;
             Vector3 vectorY = new Vector3(transform.position.x, cm, transform.position.z);
@@ -62,6 +54,20 @@ public class Movimiento : MonoBehaviour
             transform.position= Vector3.MoveTowards(transform.position, vectorY, speedArriba * Time.deltaTime);
           
         }
+
+        if (messageBinario ==null)
+        {
+            return;
+        }
+            if (messageBinario[0] == 1)
+        {
+            
+            pajaro.gameObject.GetComponent<Animator>().SetTrigger("Attack");
+
+            pajaro.transform.LookAt(minions.transform);
+
+        }
+
         // Check if the message is plain data or a connect/disconnect event.
         if (ReferenceEquals(message, SerialController.SERIAL_DEVICE_CONNECTED))
             Debug.Log("Connection established");
