@@ -36,8 +36,8 @@ public class Movimiento : MonoBehaviour
      
      
         string message = serialController.ReadSerialMessage();
-        messageBinario = serialControllerBinario.ReadSerialMessage(); ; //
-       
+        messageBinario = serialControllerBinario.ReadSerialMessage();  //
+        Debug.Log(message);
        
       
          
@@ -48,10 +48,10 @@ public class Movimiento : MonoBehaviour
             
             float velocidad = speedAdelante * 1 * Time.deltaTime;
             Vector3 vectorDesplazamiento = transform.forward * velocidad ;
-            Vector3 vectorY = new Vector3(transform.position.x, cm, transform.position.z);
+            Vector3 vectorY = new Vector3(transform.position.x, transform.position.y + cm, transform.position.z);
 
             pajaro.gameObject.transform.position += vectorDesplazamiento;
-            transform.position= Vector3.MoveTowards(transform.position, vectorY, speedArriba * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, vectorY, speedArriba * Time.deltaTime);
           
         }
 

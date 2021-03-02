@@ -55,7 +55,7 @@ public class SerialControllerBinario : MonoBehaviour
     protected Thread thread;
     protected SerialThreadLinesBinario serialThread;
 
-
+    GameObject buscador;
     // ------------------------------------------------------------------------
     // Invoked whenever the SerialController gameobject is activated.
     // It creates a new thread that tries to connect to the serial device
@@ -65,9 +65,12 @@ public class SerialControllerBinario : MonoBehaviour
     Escena datos;
     private void Awake()
     {
-        datos = GameObject.Find("DonDestroy").GetComponent<Escena>();
-        portName = datos.comESP;
-        baudRate = int.Parse(datos.baudESP);
+        buscador = GameObject.Find("DonDestroy");
+        if (buscador) {
+            datos = buscador.GetComponent<Escena>();
+            portName = datos.comESP;
+            baudRate = int.Parse(datos.baudESP);
+        }
     }
 
 

@@ -54,7 +54,7 @@ public class SerialController : MonoBehaviour
     // Internal reference to the Thread and the object that runs in it.
     protected Thread thread;
     protected SerialThreadLines serialThread;
-
+    GameObject buscador;
 
     // ------------------------------------------------------------------------
     // Invoked whenever the SerialController gameobject is activated.
@@ -64,9 +64,14 @@ public class SerialController : MonoBehaviour
     Escena datos;
     private void Awake()
     {
-         datos = GameObject.Find("DonDestroy").GetComponent<Escena>();
-        portName = datos.comArduino;
-        baudRate = int.Parse(datos.baudArduino);
+        buscador = GameObject.Find("DonDestroy");
+        if (buscador)
+        {
+
+            datos = buscador.GetComponent<Escena>();
+            portName = datos.comArduino;
+            baudRate = int.Parse(datos.baudArduino);
+        }
     }
     void OnEnable()
     {
