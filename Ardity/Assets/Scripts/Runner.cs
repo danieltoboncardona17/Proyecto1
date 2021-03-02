@@ -5,8 +5,10 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     public List<GameObject> lista = new List<GameObject>();
+    public List<GameObject> instancias = new List<GameObject>();
     public GameObject instanciador;
-    float timer = 0;
+    public float speed = 4.5f;
+   public float timer = 0;
     void Start()
     {
         
@@ -16,9 +18,10 @@ public class Runner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer>4) {
+        if (timer>6f) {
             GameObject obj = lista[Random.Range(0, lista.Count)];
             GameObject.Instantiate(obj, instanciador.gameObject.transform.position, obj.transform.rotation);
+            instancias.Add(obj);
             timer = 0;
         }
     }

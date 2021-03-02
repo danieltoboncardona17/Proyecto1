@@ -22,6 +22,7 @@ public class Movimiento : MonoBehaviour
     public SerialControllerBinario serialControllerBinario;
     public GameObject minions;
     byte[] messageBinario =  { 0x0 };
+    public Runner run;
     // Initialization
     void Start()
     {
@@ -37,7 +38,7 @@ public class Movimiento : MonoBehaviour
      
         string message = serialController.ReadSerialMessage();
         messageBinario = serialControllerBinario.ReadSerialMessage();  //
-        Debug.Log(message);
+        
        
       
          
@@ -47,25 +48,32 @@ public class Movimiento : MonoBehaviour
             float.TryParse(message ,out cm);;
             
             float velocidad = speedAdelante * 1 * Time.deltaTime;
-            Vector3 vectorDesplazamiento = transform.forward * velocidad ;
+          //  Vector3 vectorDesplazamiento = transform.forward * velocidad ;
             Vector3 vectorY = new Vector3(transform.position.x, transform.position.y + cm, transform.position.z);
 
-            pajaro.gameObject.transform.position += vectorDesplazamiento;
+            //pajaro.gameObject.transform.position += vectorDesplazamiento;
             transform.position = Vector3.MoveTowards(transform.position, vectorY, speedArriba * Time.deltaTime);
           
         }
 
         if (messageBinario ==null)
         {
+           
             return;
         }
             if (messageBinario[0] == 1)
         {
             
-            pajaro.gameObject.GetComponent<Animator>().SetTrigger("Attack");
+            pajaro.gameObject.GetComponent<Animator>().SetBool("Rapidez",true);
+            run.speed = 10.5f;
+            run.timer += 0.2f;          // pajaro.transform.LookAt(minions.transform);
 
-            pajaro.transform.LookAt(minions.transform);
+        }
+        else
+        {
 
+            pajaro.gameObject.GetComponent<Animator>().SetBool("Rapidez", false);
+            run.speed = 6.5f;
         }
 
         // Check if the message is plain data or a connect/disconnect event.

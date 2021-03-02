@@ -22,7 +22,7 @@ using System.IO.Ports;
 public class SerialThreadLinesBinario : AbstractSerialThreadBinario
 {
     private byte[] buffer = new byte[1024];
-    private int bufferUsed = 0;
+
     public SerialThreadLinesBinario(string portName,
                              int baudRate,
                              int delayBeforeReconnecting,
