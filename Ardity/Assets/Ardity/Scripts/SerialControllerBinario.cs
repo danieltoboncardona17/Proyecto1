@@ -55,12 +55,25 @@ public class SerialControllerBinario : MonoBehaviour
     protected Thread thread;
     protected SerialThreadLinesBinario serialThread;
 
-
+    GameObject buscador;
     // ------------------------------------------------------------------------
     // Invoked whenever the SerialController gameobject is activated.
     // It creates a new thread that tries to connect to the serial device
     // and start reading from it.
     // ------------------------------------------------------------------------
+
+    Escena datos;
+    private void Awake()
+    {
+        buscador = GameObject.Find("DonDestroy");
+        if (buscador) {
+            datos = buscador.GetComponent<Escena>();
+            portName = datos.comESP;
+            baudRate = int.Parse(datos.baudESP);
+        }
+    }
+
+
     void OnEnable()
     {
         serialThread = new SerialThreadLinesBinario(portName, 
@@ -130,17 +143,17 @@ public class SerialControllerBinario : MonoBehaviour
     // Returns a new unread message from the serial device. You only need to
     // call this if you don't provide a message listener.
     // ------------------------------------------------------------------------
-    public string ReadSerialMessage()
+    public byte[] ReadSerialMessage()
     {
         // Read the next message from the queue
-        return (string)serialThread.ReadMessage();
+        return (byte[])serialThread.ReadMessage();
     }
 
     // ------------------------------------------------------------------------
     // Puts a message in the outgoing queue. The thread object will send the
     // message to the serial device when it considers it's appropriate.
     // ------------------------------------------------------------------------
-    public void SendSerialMessage(string message)
+    public void SendSerialMessage(byte[] message)
     {
         serialThread.SendMessage(message);
     }

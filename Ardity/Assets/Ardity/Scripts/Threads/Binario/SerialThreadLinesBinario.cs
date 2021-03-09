@@ -21,21 +21,31 @@ using System.IO.Ports;
  */
 public class SerialThreadLinesBinario : AbstractSerialThreadBinario
 {
+    private byte[] buffer = new byte[1024];
+
     public SerialThreadLinesBinario(string portName,
                              int baudRate,
                              int delayBeforeReconnecting,
                              int maxUnreadMessages)
-        : base(portName, baudRate, delayBeforeReconnecting, maxUnreadMessages, true)
+        : base(portName, baudRate, delayBeforeReconnecting, maxUnreadMessages, false)
     {
     }
 
     protected override void SendToWire(object message, SerialPort serialPort)
     {
-        serialPort.WriteLine((string) message);
+        byte[] binaryMessage = (byte[])message;
+        serialPort.Write(binaryMessage, 0, binaryMessage.Length);
     }
-
     protected override object ReadFromWire(SerialPort serialPort)
     {
-        return serialPort.ReadLine();
+        if (serialPort.BytesToRead > 0)
+        {     
+            serialPort.Read(buffer, 0, 1);     
+            return buffer;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
